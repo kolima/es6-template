@@ -98,6 +98,6 @@ function templateFn (str) {
     if (prop && prop.indexOf('.') !== -1) {
       return utils.getValue(data, prop)
     }
-    return typeof data[prop] !== 'undefined' ? data[prop] : ''
+    return typeof data[prop] !== 'undefined' ? data[prop] : '${'+ prop +'}'
   })
 }
