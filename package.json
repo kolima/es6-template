@@ -44,10 +44,5 @@
     "string",
     "template",
     "tpl"
-  ],
-  "standard": {
-    "ignore": [
-      "dist/**"
-    ]
-  }
+  ]
 }
