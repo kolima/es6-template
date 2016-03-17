@@ -31,7 +31,7 @@
   "files": [
     "index.js",
     "dist/es6-template.js",
-    "dist/es6-template-standalone.js",
+    "dist/es6-template.standalone.js",
     "utils.js"
   ],
   "keywords": [
