@@ -95,7 +95,11 @@ function templateFn (str) {
   var data = {}
   utils.sliced(arguments, 1).forEach(function (obj) {
     data = utils.extendShallow(data, obj)
-  })
+  });
+  
+    
+  if (!str) return undefined;
+  
   return str.replace(utils.regex(), function (m, prop) {
     if (prop && prop.indexOf('.') !== -1) {
       return utils.getValue(data, prop)
