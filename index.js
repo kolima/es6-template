@@ -93,11 +93,22 @@ function templateFn (str) {
   var data = {}
   utils.sliced(arguments, 1).forEach(function (obj) {
     data = utils.extendShallow(data, obj)
-  })
-  return str.replace(utils.regex(), function (m, prop) {
+  });
+
+  var strWithVaribales = str.replace(utils.regex(), function (m, prop) {
     if (prop && prop.indexOf('.') !== -1) {
       return utils.getValue(data, prop)
     }
     return typeof data[prop] !== 'undefined' ? data[prop] : '${'+ prop +'}'
-  })
+  });
+
+  var conditional = strWithVaribales.match('{{if immaterialExpired}}(.*){{/if}}');
+
+  if (conditional && conditional.length && conditional[1]) {
+    if (data['immaterialExpired']) {
+      return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, conditional[1]);
+    }
+  }
+
+  return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, '');
 }
