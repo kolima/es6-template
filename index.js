@@ -94,6 +94,8 @@ function templateFn (str) {
   utils.sliced(arguments, 1).forEach(function (obj) {
     data = utils.extendShallow(data, obj)
   });
+  
+  if (!str) return undefined;
 
   var strWithVaribales = str.replace(utils.regex(), function (m, prop) {
     if (prop && prop.indexOf('.') !== -1) {
