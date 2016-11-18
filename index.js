@@ -104,13 +104,21 @@ function templateFn (str) {
     return typeof data[prop] !== 'undefined' ? data[prop] : '${'+ prop +'}'
   });
 
-  var conditional = strWithVaribales.match('{{if immaterialExpired}}(.*){{/if}}');
+  var conditionalImmaterial = strWithVaribales.match('{{if immaterialExpired}}(.*){{/if}}');
 
-  if (conditional && conditional.length && conditional[1]) {
+  if (conditionalImmaterial && conditionalImmaterial.length && conditionalImmaterial[1]) {
     if (data['immaterialExpired']) {
-      return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, conditional[1]);
+      strWithVaribales = strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, conditionalImmaterial[1]);
+    }
+  }
+  
+  var conditionalCanUseHere = strWithVaribales.match('{{if canUseHere}}(.*){{/if}}');
+
+  if (conditionalCanUseHere && conditionalCanUseHere.length && conditionalCanUseHere[1]) {
+    if (data['canUseHere']) {
+      strWithVaribales = strWithVaribales.replace(/{{if canUseHere}}(.*){{\/if}}/ig, conditionalCanUseHere[1]);
     }
   }
 
-  return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, '');
+  return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, '').replace(/{{if canUseHere}}(.*){{\/if}}/ig, '');
 }
