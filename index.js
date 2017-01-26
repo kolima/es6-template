@@ -119,6 +119,15 @@ function templateFn (str) {
       strWithVaribales = strWithVaribales.replace(/{{if canUseHere}}(.*){{\/if}}/ig, conditionalCanUseHere[1]);
     }
   }
+  
+  
+   var conditionalPromotionalCode = strWithVaribales.match('{{if promotionalCode}}(.*){{/if}}');
 
-  return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, '').replace(/{{if canUseHere}}(.*){{\/if}}/ig, '');
+  if (conditionalPromotionalCode && conditionalPromotionalCode.length && conditionalPromotionalCode[1]) {
+    if (data['promotionalCode']) {
+      strWithVaribales = strWithVaribales.replace(/{{if promotionalCode}}(.*){{\/if}}/ig, conditionalPromotionalCode[1]);
+    }
+  }
+
+  return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, '').replace(/{{if canUseHere}}(.*){{\/if}}/ig, '').replace(/{{if promotionalCode}}(.*){{\/if}}/ig, '');
 }
