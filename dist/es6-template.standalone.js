@@ -130,6 +130,14 @@ function templateFn (str) {
       strWithVaribales = strWithVaribales.replace(/{{if promotionalCode}}(.*){{\/if}}/ig, conditionalPromotionalCode[1]);
     }
   }
+  
+  var conditionalLosersParticipateLink = strWithVaribales.match('{{if losersLink}}(.*){{/if}}');
 
-  return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, '').replace(/{{if canUseHere}}(.*){{\/if}}/ig, '').replace(/{{if promotionalCode}}(.*){{\/if}}/ig, '');
+  if (conditionalLosersParticipateLink && conditionalLosersParticipateLink.length && conditionalLosersParticipateLink[1]) {
+    if (data['losersLink']) {
+      strWithVaribales = strWithVaribales.replace(/{{if losersLink}}(.*){{\/if}}/ig, conditionalLosersParticipateLink[1]);
+    }
+  }
+
+  return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, '').replace(/{{if canUseHere}}(.*){{\/if}}/ig, '').replace(/{{if promotionalCode}}(.*){{\/if}}/ig, '').replace(/{{if losersLink}}(.*){{\/if}}/ig, '');
 }
