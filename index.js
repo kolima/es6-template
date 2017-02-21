@@ -129,5 +129,13 @@ function templateFn (str) {
     }
   }
 
-  return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, '').replace(/{{if canUseHere}}(.*){{\/if}}/ig, '').replace(/{{if promotionalCode}}(.*){{\/if}}/ig, '');
+  var conditionalLosersParticipateLink = strWithVaribales.match('{{if losersLink}}(.*){{/if}}');
+
+  if (conditionalLosersParticipateLink && conditionalLosersParticipateLink.length && conditionalLosersParticipateLink[1]) {
+    if (data['losersLink']) {
+      strWithVaribales = strWithVaribales.replace(/{{if losersLink}}(.*){{\/if}}/ig, conditionalLosersParticipateLink[1]);
+    }
+  }
+
+  return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, '').replace(/{{if canUseHere}}(.*){{\/if}}/ig, '').replace(/{{if promotionalCode}}(.*){{\/if}}/ig, '').replace(/{{if losersLink}}(.*){{\/if}}/ig, '');
 }
