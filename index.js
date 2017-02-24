@@ -129,13 +129,21 @@ function templateFn (str) {
     }
   }
 
-  var conditionalLosersParticipateLink = strWithVaribales.match('{{if losersLink}}(.*){{/if}}');
+   var conditionalRepeats = strWithVaribales.match('{{if repeats}}(.*){{/if}}');
 
-  if (conditionalLosersParticipateLink && conditionalLosersParticipateLink.length && conditionalLosersParticipateLink[1]) {
-    if (data['losersLink']) {
-      strWithVaribales = strWithVaribales.replace(/{{if losersLink}}(.*){{\/if}}/ig, conditionalLosersParticipateLink[1]);
+  if (conditionalRepeats && conditionalRepeats.length && conditionalRepeats[1]) {
+    if (data['repeats']) {
+      strWithVaribales = strWithVaribales.replace(/{{if repeats}}(.*){{\/if}}/ig, conditionalRepeats[1]);
+    }
+  }
+  
+  var conditionalHasNotMarketing = strWithVaribales.match('{{if hasNotMarketing}}(.*){{/if}}');
+
+  if (conditionalHasNotMarketing && conditionalHasNotMarketing.length && conditionalHasNotMarketing[1]) {
+    if (data['hasNotMarketing']) {
+      strWithVaribales = strWithVaribales.replace(/{{if hasNotMarketing}}(.*){{\/if}}/ig, conditionalHasNotMarketing[1]);
     }
   }
 
-  return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, '').replace(/{{if canUseHere}}(.*){{\/if}}/ig, '').replace(/{{if promotionalCode}}(.*){{\/if}}/ig, '').replace(/{{if losersLink}}(.*){{\/if}}/ig, '');
+  return strWithVaribales.replace(/{{if immaterialExpired}}(.*){{\/if}}/ig, '').replace(/{{if canUseHere}}(.*){{\/if}}/ig, '').replace(/{{if promotionalCode}}(.*){{\/if}}/ig, '').replace(/{{if repeats}}(.*){{\/if}}/ig, '').replace(/{{if hasNotMarketing}}(.*){{\/if}}/ig, '');
 }
